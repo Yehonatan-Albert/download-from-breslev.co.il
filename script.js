@@ -10,7 +10,7 @@ for (const [i, e] of videos.entries()) {
     try {
         const link = (await fetch(e.href).then(r => r.text())).match(/https:\/\/.+\.mp4/)[0]
         const arrayBuffer = await fetch(link).then(r => r.arrayBuffer())
-        const name = `${decodeURIComponent(e.href).match(/[א-ת-]+/)[0]}.mp4`
+        const name = `${decodeURIComponent(e.href).match(/[א-ת-]+/)[0].replaceAll('-', ' ')}.mp4`
         zip.file(`${folder}/${name}`, arrayBuffer)
         console.clear()
         console.log(`מכין להורדה... ${i + 1} מתוך ${videos.length} סרטונים`)
